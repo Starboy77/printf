@@ -2,11 +2,19 @@
 #include <stdarg.h>
 #include <unistd.h>
 
+/**
+ * hex_upper - convert to upper hex
+ *
+ * @x: character
+ * @print: print
+ *
+ * Return: 0
+ */
+
 int hex_upper(int x, buffer_t *print)
 {
 	int y;
 	int i, j, tmp, *arr;
-       
 
 	y = x;
 	j = 0;
@@ -33,6 +41,14 @@ int hex_upper(int x, buffer_t *print)
 
 }
 
+/**
+ * custom_S - custom
+ *
+ * @ptr: print
+ * @print: print func
+ *
+ * Return: 0
+ */
 
 int custom_S(va_list ptr, buffer_t *print)
 {

@@ -2,6 +2,15 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+/**
+ * custom_b - custom b
+ *
+ * @ptr: print
+ * @print: print func
+ *
+ * Return: 0
+ */
+
 int custom_b(va_list ptr, buffer_t *print)
 {
 	char d;

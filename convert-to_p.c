@@ -1,6 +1,15 @@
 #include "main.h"
 #include <stdlib.h>
 
+/**
+ * convert_p - converts list to hex_lower
+ *
+ * @ptr: print
+ * @printer: printer
+ *
+ * Return: 0
+ */
+
 int convert_p(va_list ptr, buffer_t *printer)
 {
 	unsigned long int con;
@@ -10,6 +19,14 @@ int convert_p(va_list ptr, buffer_t *printer)
 	return (0);
 }
 
+/**
+ * hex_lower - prints inlower hex
+ *
+ * @x: character
+ * @print: print
+ *
+ * Return: 0
+ */
 
 int hex_lower(unsigned long int x, buffer_t *print)
 {
@@ -41,6 +58,15 @@ int hex_lower(unsigned long int x, buffer_t *print)
 	free(arr);
 	return (0);
 }
+
+/**
+ * convert_p_hex - converts p to hex
+ *
+ * @i: character
+ * @arr: array
+ * @print: print
+ * Return: 0
+ */
 
 void convert_p_hex(int i, int *arr, buffer_t *print)
 {
