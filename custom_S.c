@@ -2,12 +2,11 @@
 #include <stdarg.h>
 #include <unistd.h>
 
+
 /**
- * hex_upper - convert to upper hex
- *
- * @x: character
- * @print: print
- *
+ * hex_upper - function reverses string
+ * @x: integer prameter
+ * @print: memory buffer
  * Return: 0
  */
 
@@ -15,6 +14,7 @@ int hex_upper(int x, buffer_t *print)
 {
 	int y;
 	int i, j, tmp, *arr;
+
 
 	y = x;
 	j = 0;
@@ -42,20 +42,22 @@ int hex_upper(int x, buffer_t *print)
 }
 
 /**
- * custom_S - custom
- *
- * @ptr: print
- * @print: print func
- *
+ * custom_S - function reverses string
+ * @ptr: arg list
+ * @print: memory buffer
+ * @opp: just there
  * Return: 0
  */
 
-int custom_S(va_list ptr, buffer_t *print)
+
+int custom_S(va_list ptr, buffer_t *print, int opp)
 {
 	char *s, *d, *zero;
-	int i;
+	int i = 0;
 	int cha;
 
+	opp = 0;
+	opp = i;
 	s = va_arg(ptr, char *);
 	i = 0;
 	while (s[i])
@@ -83,5 +85,5 @@ int custom_S(va_list ptr, buffer_t *print)
 			_memcpy(print, &s[i], 1);
 		i++;
 	}
-	return (0);
+	return (opp);
 }

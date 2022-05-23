@@ -1,32 +1,34 @@
 #include "main.h"
 #include <stdlib.h>
 
+
 /**
- * convert_p - converts list to hex_lower
- *
- * @ptr: print
- * @printer: printer
- *
+ * convert_p - function reverses string
+ * @ptr: arg list
+ * @printer: memory buffer
+ * @opp: just there
  * Return: 0
  */
 
-int convert_p(va_list ptr, buffer_t *printer)
+
+int convert_p(va_list ptr, buffer_t *printer, int opp)
 {
 	unsigned long int con;
 
+	opp = 0;
 	con = va_arg(ptr, unsigned long int);
 	hex_lower(con, printer);
-	return (0);
+	return (opp);
 }
 
+
 /**
- * hex_lower - prints inlower hex
- *
- * @x: character
- * @print: print
- *
+ * hex_lower - function reverses string
+ * @x: prameter list
+ * @print: memory buffer
  * Return: 0
  */
+
 
 int hex_lower(unsigned long int x, buffer_t *print)
 {
@@ -59,13 +61,14 @@ int hex_lower(unsigned long int x, buffer_t *print)
 	return (0);
 }
 
+
+
+
 /**
- * convert_p_hex - converts p to hex
- *
- * @i: character
- * @arr: array
- * @print: print
- * Return: 0
+ * convert_p_hex - function reverses string
+ * @i: arg list
+ * @print: memory buffer
+ * @arr: just there
  */
 
 void convert_p_hex(int i, int *arr, buffer_t *print)

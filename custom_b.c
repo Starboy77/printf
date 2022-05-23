@@ -3,20 +3,22 @@
 #include <stdlib.h>
 
 /**
- * custom_b - custom b
- *
- * @ptr: print
- * @print: print func
- *
+ * custom_b - function reverses string
+ * @ptr: arg list
+ * @print: memory buffer
+ * @opp: just there
  * Return: 0
  */
 
-int custom_b(va_list ptr, buffer_t *print)
+
+int custom_b(va_list ptr, buffer_t *print, int opp)
 {
 	char d;
-	int j, *bin;
+	int j = 0, *bin;
 	unsigned int num;
 
+	opp = 0;
+	opp = j;
 	num = (unsigned int)va_arg(ptr, int);
 	bin = malloc(num);
 	if (bin == NULL)
@@ -36,5 +38,5 @@ int custom_b(va_list ptr, buffer_t *print)
 		j--;
 	}
 	free(bin);
-	return (0);
+	return (opp);
 }
