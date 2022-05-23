@@ -87,5 +87,6 @@ int _printf(const char *format, ...)
 	}
 	write(1, print->start, print->len);
 	free_buf(print);
+	va_end(ptr);
 	return (0);
 }
