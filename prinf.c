@@ -66,6 +66,9 @@ int _printf(const char *format, ...)
 	va_list ptr;
 	buffer_t *print = init_buffer();
 
+	if (print == NULL)
+		return (-1);
+
 	va_start(ptr, format);
 
 	i = 0;
@@ -85,6 +88,7 @@ int _printf(const char *format, ...)
 		}
 		i++;
 	}
+	va_end(ptr);
 	write(1, print->start, print->len);
 	final = print->len;
 	free_buf(print);
