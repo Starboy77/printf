@@ -62,7 +62,7 @@ int (*spec(char s))(va_list ptr, buffer_t *print, int arr)
 
 int _printf(const char *format, ...)
 {
-	int arr, i, j, tot = 0;
+	int arr = 0, i = 0, j = 0, final = 0, tot = 0;
 	va_list ptr;
 	buffer_t *print = init_buffer();
 
@@ -86,7 +86,7 @@ int _printf(const char *format, ...)
 		i++;
 	}
 	write(1, print->start, print->len);
+	final = print->len;
 	free_buf(print);
-	va_end(ptr);
-	return (0);
+	return (final);
 }

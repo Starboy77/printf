@@ -19,7 +19,6 @@ int print_d_i(va_list ptr, buffer_t *print, int arr)
 	if (print->start[print->len - 1] == 'h')
 	{
 		print->start[print->len - 1] = 0;
-		(print->buffer) -= 0;
 		res = va_arg(ptr, int);
 		res = (short)res;
 		res = ret(res, print);
@@ -28,7 +27,6 @@ int print_d_i(va_list ptr, buffer_t *print, int arr)
 	else if (print->start[print->len - 1] == 'l')
 	{
 		print->start[print->len - 1] = 0;
-		(print->buffer) -= 2;
 		res = (long int)va_arg(ptr, long int);
 		res = (long int)ret(res, print);
 		out_array(res, print, arr);
@@ -36,7 +34,6 @@ int print_d_i(va_list ptr, buffer_t *print, int arr)
 	else
 	{
 		res = va_arg(ptr, int);
-		(print->buffer)--;
 		res = ret_none(res, print);
 		out_array(res, print, arr);
 	}
@@ -59,34 +56,21 @@ long int ret(int re, buffer_t *print)
 	if (re < 0)
 	{
 		re = re * -1;
-		i = 2;
-		while (print->start[print->len - i])
+		i = 1;
+		if (print->start[print->len - i] == '+')
 		{
-			if (print->start[print->len - i] == '+')
-			{
-				print->start[print->len - i] = 0;
-				(print->buffer)--;
-				_memcpy(print, &c, 1);
-				i++;
-				break;
-			}
-			else if (print->start[print->len - i] == ' ')
-			{
-				print->start[print->len - i] = 0;
-				(print->buffer)--;
-				_memcpy(print, &c, 1);
-				i++;
-				break;
-			}
-			else if (print->start[print->len - i] == '-')
-			{
-				print->start[print->len - i] = '-';
-				(print->buffer)--;
-				i++;
-				break;
-			}
-			i++;
+			print->start[print->len - i] = '-';
 		}
+		else if (print->start[print->len - i] == ' ')
+		{
+			print->start[print->len - i] = '-';
+		}
+		else
+			_memcpy(print, &c, 1);
+	}
+	else
+	{
+		re = re;
 	}
 	return (re);
 }
@@ -154,33 +138,20 @@ int ret_none(int re, buffer_t *print)
 	{
 		re = re * -1;
 		i = 1;
-		while (print->start[print->len - i])
-		{
 			if (print->start[print->len - i] == '+')
 			{
-				print->start[print->len - i] = 0;
-				(print->buffer)--;
-				_memcpy(print, &c, 1);
-				i++;
-				break;
+				print->start[print->len - i] = '-';
 			}
 			else if (print->start[print->len - i] == ' ')
 			{
-				print->start[print->len - i] = 0;
-				(print->buffer)--;
-				_memcpy(print, &c, 1);
-				i++;
-				break;
-			}
-			else if (print->start[print->len - i] == '-')
-			{
 				print->start[print->len - i] = '-';
-				(print->buffer)--;
-				i++;
-				break;
 			}
-			i++;
-		}
+			else
+				_memcpy(print, &c, 1);
+	}
+	else
+	{
+		re = re;
 	}
 	return (re);
 }

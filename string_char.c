@@ -19,7 +19,9 @@ int string(va_list ptr, buffer_t *print, int arr)
 		_memcpy(print, str, _strlen(str));
 	}
 	else
+	{
 		_memcpy(print, str, _strlen(str));
+	}
 	return (0);
 }
 

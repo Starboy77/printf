@@ -101,19 +101,28 @@ int flag_sub(int arr, int i, int j, const char *format, buffer_t *print,
 {
 	char lng, shrt;
 
-	while (arr >= 0)
+	if (arr > 0)
 	{
-		_memcpy(print, space, 1);
-		arr--;
+		while (arr >= 0)
+		{
+			_memcpy(print, space, 1);
+			arr--;
+		}
 	}
 	if (j > 1)
 	{
 		if (format[i + j] == 'x')
+		{
 			_memcpy(print, small, 2);
+		}
 		if (format[i + j] == 'X')
+		{
 			_memcpy(print, big, 2);
+		}
 		if (format[i + j] == 'o')
+		{
 			_memcpy(print, &oct, 1);
+		}
 	}
 	if (format[i + j - 1] == 'h')
 	{
