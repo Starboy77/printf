@@ -18,6 +18,12 @@ int custom_u(va_list ptr, buffer_t *print, int opp)
 	unsigned int num, mun = 0;
 
 	num = (unsigned int)va_arg(ptr, int);
+	if (num == 0)
+	{
+		d = '0';
+		_memcpy(print, &d, 1);
+		return (0);
+	}
 	mun = num;
 	j = 0;
 	while (num > 0)
@@ -64,6 +70,12 @@ int custom_o(va_list ptr, buffer_t *print, int opp)
 	unsigned int num, same;
 
 	num = (unsigned int)va_arg(ptr, int);
+	if (num == 0)
+	{
+		d = '0';
+		_memcpy(print, &d, 1);
+		return (0);
+	}
 	same = num;
 	i = 0;
 	while (num > 0)
@@ -107,12 +119,17 @@ int custom_o(va_list ptr, buffer_t *print, int opp)
 
 int custom_x(va_list ptr, buffer_t *print, int opp)
 {
-	int i;
-	int j, temp, *arr;
+	char d;
+	int i, j, temp, *arr;
 	unsigned int num, same;
 
-
 	num = (unsigned int)va_arg(ptr, int);
+	if (num == 0)
+	{
+		d = '0';
+		_memcpy(print, &d, 1);
+		return (0);
+	}
 	if (num == 0 &&  print->start[print->len - 2] == '0' &&  print->start
 	    [print->len - 1] == 'x')
 	{
@@ -191,11 +208,18 @@ void convert_hex_upper(int i, int *arr, buffer_t *print)
 
 int custom_X(va_list ptr, buffer_t *print, int opp)
 {
+	char d;
 	int i;
 	int j, temp, *arr;
 	unsigned int num, same;
 
 	num = (unsigned int)va_arg(ptr, int);
+	if (num == 0)
+	{
+		d = '0';
+		_memcpy(print, &d, 1);
+		return (0);
+	}
 	if (num == 0 &&  print->start[print->len - 2] == '0' &&  print->start
 	    [print->len - 1] == 'X')
 	{

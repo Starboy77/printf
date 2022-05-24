@@ -13,10 +13,17 @@
 
 int convert_p(va_list ptr, buffer_t *printer, int opp)
 {
+	char *d;
 	unsigned long int con;
 
 	opp = 0;
 	con = va_arg(ptr, unsigned long int);
+	if (con == 0)
+	{
+		d = "(nil)";
+		_memcpy(printer, d, 5);
+		return (0);
+	}
 	hex_lower(con, printer);
 	return (opp);
 }
