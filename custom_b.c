@@ -20,6 +20,12 @@ int custom_b(va_list ptr, buffer_t *print, int opp)
 	opp = 0;
 	opp = j;
 	num = (unsigned int)va_arg(ptr, int);
+	if (num == 0)
+	{
+		d = '0';
+		_memcpy(print, &d, 1);
+		return (opp);
+	}
 	bin = malloc(num);
 	if (bin == NULL)
 		return (-1);
