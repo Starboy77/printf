@@ -10,13 +10,18 @@
 
 int string(va_list ptr, buffer_t *print, int arr)
 {
-	char *str;
+	char *str, *d;
 
 	str = va_arg(ptr, char *);
 	if (arr > 0 && arr > _strlen(str))
 	{
 		print->buffer -= _strlen(str) + 1;
 		_memcpy(print, str, _strlen(str));
+	}
+	if (str == 0)
+	{
+		d = "(null)";
+		_memcpy(print, d, 6);
 	}
 	else
 	{

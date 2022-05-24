@@ -18,6 +18,7 @@ typedef struct buffer
 	char *buffer;
 	char *start;
 	unsigned int len;
+	unsigned int final;
 }  buffer_t;
 
 /**

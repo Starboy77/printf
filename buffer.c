@@ -21,18 +21,18 @@ unsigned int _memcpy(buffer_t *print, const char *src, unsigned int n)
 	{
 		*(print->buffer) = *(src + index);
 		(print->len)++;
+		(print->final)++;
 
-		if (print->len == 1024)
+		if (print->final == 1024)
 		{
 			write(1, print->start, print->len);
 			print->buffer = print->start;
-			print->len = 0;
+			print->final = 0;
 		}
 
 		else
 			(print->buffer)++;
 	}
-
 	return (n);
 }
 
@@ -68,6 +68,7 @@ buffer_t *init_buffer(void)
 
 	print->start = print->buffer;
 	print->len = 0;
+	print->final = 0;
 
 	return (print);
 }
