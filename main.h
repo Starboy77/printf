@@ -34,7 +34,7 @@ typedef struct specifier
 }  spec_t;
 
 
-int pformat(const char *form, int i);
+int check_zero(long int res, buffer_t *print);
 int _printf(const char *format, ...);
 int _strlen(char *s);
 int rot13(va_list ptr, buffer_t *print, int arr);

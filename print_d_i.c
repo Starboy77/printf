@@ -14,12 +14,14 @@
 
 int print_d_i(va_list ptr, buffer_t *print, int arr)
 {
+	char d;
 	long int res = 0;
 
 	if (print->start[print->len - 1] == 'h')
 	{
 		print->start[print->len - 1] = 0;
 		res = va_arg(ptr, int);
+		check_zero(res, print);
 		res = (short)res;
 		res = ret(res, print);
 		out_array(res, print, arr);
@@ -28,12 +30,19 @@ int print_d_i(va_list ptr, buffer_t *print, int arr)
 	{
 		print->start[print->len - 1] = 0;
 		res = (long int)va_arg(ptr, long int);
+		check_zero(res, print);
 		res = (long int)ret(res, print);
 		out_array(res, print, arr);
 	}
 	else
 	{
 		res = va_arg(ptr, int);
+		if (res == 0)
+		{
+			d = '0';
+			_memcpy(print, &d, 1);
+			return (0);
+		}
 		res = ret_none(res, print);
 		out_array(res, print, arr);
 	}
@@ -154,4 +163,23 @@ int ret_none(int re, buffer_t *print)
 		re = re;
 	}
 	return (re);
+}
+
+
+/**
+ * check_zero - check for zero
+ * @res: params
+ * Return: 0
+ */
+
+int check_zero(long int res, buffer_t *print)
+{
+	char d;
+	if (res == 0)
+	{
+		d = '0';
+		_memcpy(print, &d, 1);
+		return (0);
+	}
+	return (0);
 }
