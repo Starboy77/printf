@@ -34,6 +34,8 @@ typedef struct specifier
 }  spec_t;
 
 
+int isnull(buffer_t *print, const char *format);
+int print_end(buffer_t *print, va_list ptr, int final);
 int check_zero(long int res, buffer_t *print);
 int _printf(const char *format, ...);
 int _strlen(char *s);
@@ -60,6 +62,7 @@ int ret_none(int re, buffer_t *print);
 char *rot(char *s);
 
 
+int not_spec(int i, const char *format, buffer_t *print);
 void convert_p_hex(int i, int *arr, buffer_t *print);
 void convert_hex_upper(int i, int *arr, buffer_t *print);
 int out_array(int res, buffer_t *print, int arr);

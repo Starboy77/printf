@@ -66,31 +66,84 @@ int _printf(const char *format, ...)
 	va_list ptr;
 	buffer_t *print = init_buffer();
 
-	if (print == NULL)
+	if (format == NULL || print == NULL)
 		return (-1);
-
 	va_start(ptr, format);
-
-	i = 0;
 	while (format[i])
 	{
 		if (format[i] != '%')
-		{
 			tot += _memcpy(print, &format[i], 1);
-		}
 		else
 		{
-			j = flag(i, format, print);
-			arr = width(i, format);
-			spec(format[i + j])(ptr, print, arr);
-			i = i + j + 1;
-			continue;
+			if (format[i] == '%' && format[i + 1] == 0)
+				return (-1);
+			else if (format[i] == '%' && format[i + 1] != 's' &&
+format[i + 1] != 'c' && format[i + 1] != 'd' && format[i + 1] != 'i' &&
+format[i + 1] != 'u' && format[i + 1] != 'o' && format[i + 1] != 'x' &&
+format[i + 1] != 'X' && format[i + 1] != 'p' && format[i + 1] != 'b' &&
+format[i + 1] != 'S' && format[i + 1] != 'r' && format[i + 1] != 'R' &&
+format[i + 1] != '+' && format[i + 1] != 'h' && format[i + 1] != '#' &&
+format[i + 1] != '%' && format[i + 1] != ' ')
+			{
+				j = not_spec(i, format, print);
+				i = j + 1;
+				continue;
+			}
+			else
+			{
+				j = flag(i, format, print);
+				arr = width(i, format);
+				spec(format[i + j])(ptr, print, arr);
+				i = i + j + 1;
+				continue;
+			}
 		}
 		i++;
 	}
+	final = print_end(print, ptr, final);
+	return (final);
+}
+
+
+/**
+ * print-end - end printf function
+ * @print: memory buffers
+ * @ptr: va args
+ * @final: int parameter
+ * Return: 0
+ */
+
+
+int print_end(buffer_t *print, va_list ptr, int final)
+{
 	va_end(ptr);
 	write(1, print->start, print->len);
 	final = print->len;
 	free_buf(print);
 	return (final);
+}
+
+
+/**
+ * not_spec - flag function
+ * @i: arg list
+ * @print: memory buffer
+ * @format: format string
+ * Return: 0
+ */
+
+
+int not_spec(int i, const char *format, buffer_t *print)
+{
+	if (format[i + 1] != 's' && format[i + 1] != 'c' && format[i + 1] != 'd'
+	    && format[i + 1] != 'i' && format[i + 1] != 'u' && format[i + 1] !=
+	    'o' && format[i + 1] != 'x' && format[i + 1] != 'X' && format[i + 1]
+	    != 'p' && format[i + 1] != 'b' && format[i + 1] != 'S' &&
+	    format[i + 1] != 'r' && format[i + 1] != 'R' && format[i + 1] != 0
+	    && format[i + 1] != '+' && format[i + 1] != 'h')
+	{
+		_memcpy(print, &format[i], 1);
+		_memcpy(print, &format[i + 1], 1);
+	}
+	return (i + 1);
 }
