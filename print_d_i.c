@@ -14,8 +14,8 @@
 
 int print_d_i(va_list ptr, buffer_t *print, int arr)
 {
-	char d;
-	long int res = 0;
+	char d, c = '-';
+	long int res = 0, i;
 
 	res = va_arg(ptr, int);
 	if (res == 0)
@@ -24,21 +24,23 @@ int print_d_i(va_list ptr, buffer_t *print, int arr)
 		_memcpy(print, &d, 1);
 		return (0);
 	}
-	res = ret_none(res, print);
+	if (res < 0)
+	{
+		res = res * -1;
+		i = 1;
+		if (print->start[print->len - i] == '+')
+		{
+			print->start[print->len - i] = '-';
+		}
+		else if (print->start[print->len - i] == ' ')
+		{
+			print->start[print->len - i] = '-';
+		}
+		else
+			_memcpy(print, &c, 1);
+	}
 	out_array(res, print, arr);
-	if (print->start[print->len - 1] == 'h')
-	{
-		res = (short)res;
-		res = ret(res, print);
-		out_array(res, print, arr);
-	}
-	else if (print->start[print->len - 1] == 'l')
-	{
-		print->start[print->len - 1] = 0;
-		res = (long int)va_arg(ptr, long int);
-		res = (long int)ret(res, print);
-		out_array(res, print, arr);
-	}
+
 	return (0);
 }
 
