@@ -29,7 +29,16 @@ int print_d_i(va_list ptr, buffer_t *print, int arr)
 	if (res < 0)
 	{
 		n = -res;
-		_memcpy(print, &c, 1);
+		if (print->start[print->len - i] == '+')
+		{
+			print->start[print->len - i] = '-';
+		}
+		else if (print->start[print->len - i] == ' ')
+		{
+			print->start[print->len - i] = '-';
+		}
+		else
+			_memcpy(print, &c, 1);
 	}
 	out_array(n, print, arr);
 	return (arr);
