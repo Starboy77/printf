@@ -43,7 +43,15 @@ int custom_u(va_list ptr, buffer_t *print, int opp)
 		i++;
 	}
 	if (opp > 0 && (unsigned int)opp > j)
-		print->buffer -= j + 1;
+	{
+		print->buffer -= j;
+		print->len -= j;
+	}
+	if (opp > 0 && (unsigned int)opp < j)
+	{
+		print->buffer -= opp;
+		print->len -= opp;
+	}
 	i--;
 	while (i < j)
 	{
@@ -95,7 +103,15 @@ int custom_o(va_list ptr, buffer_t *print, int opp)
 		j++;
 	}
 	if (opp > 0 && (unsigned int)opp > i)
-		print->buffer -= i + 1;
+	{
+		print->buffer -= i;
+		print->len -= i;
+	}
+	if (opp > 0 && (unsigned int)opp < i)
+	{
+		print->buffer -= opp;
+		print->len -= opp;
+	}
 	j--;
 	while (j < i)
 	{
@@ -154,7 +170,15 @@ int custom_x(va_list ptr, buffer_t *print, int opp)
 		i++;
 	}
 	if (opp > 0 && opp > j)
-		print->buffer -= j + 1;
+	{
+		print->buffer -= j + 2;
+		print->len -= j + 2;
+	}
+	if (opp > 0 && opp < j)
+	{
+		print->buffer -= opp + 2;
+		print->len -= opp + 2;
+	}
 	i--;
 	convert_p_hex(i, arr, print);
 	return (0);
@@ -244,7 +268,15 @@ int custom_X(va_list ptr, buffer_t *print, int opp)
 		i++;
 	}
 	if (opp > 0 && opp > j)
-		print->buffer -= j + 1;
+	{
+		print->buffer -= j + 2;
+		print->len -= j + 2;
+	}
+	if (opp > 0 && opp < j)
+	{
+		print->buffer -= opp + 2;
+		print->len -= opp + 2;
+	}
 	i--;
 	convert_hex_upper(i, arr, print);
 	return (opp);

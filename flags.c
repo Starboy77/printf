@@ -12,7 +12,7 @@
 int flag(int i, const char *format, buffer_t *print)
 {
 	int j = 1, arr = 0;
-	char plus = '0', *space = " ", blank = ' ', oct, *small;
+	char plus = '0', *zero, *space = " ", blank = ' ', oct, *small;
 	char *big;
 
 	while (format[i + j] != '%' && format[i + j] != 'd' && format[i + j] !=
@@ -23,6 +23,8 @@ int flag(int i, const char *format, buffer_t *print)
 	       'p' && format[i + j] != 'S' && format[i + j] != 'r'
 	       && format[i + j] != 'R')
 	{
+		if (format[i + 1] == '0')
+			zero = "0";
 		if (format[i + j] >= 48 && format[i + j] < 58)
 		{
 			arr = (arr * 10) + (format[i + j] - '0');
@@ -46,7 +48,7 @@ int flag(int i, const char *format, buffer_t *print)
 		}
 		j++;
 	}
-	flag_sub(arr, i, j, format, print, small, big, oct, space);
+	flag_sub(arr, i, j, format, print, small, big, oct, space, zero);
 	return (j);
 }
 
@@ -97,16 +99,24 @@ int width(int i, const char *format)
 
 
 int flag_sub(int arr, int i, int j, const char *format, buffer_t *print,
-	     char *small, char *big, char oct, char *space)
+	     char *small, char *big, char oct, char *space, char *zero)
 {
 	char lng, shrt;
 
 	if (arr > 0)
 	{
-		while (arr >= 0)
+		while (arr > 0)
 		{
-			_memcpy(print, space, 1);
-			arr--;
+			if (zero != NULL)
+			{
+				_memcpy(print, zero, 1);
+				arr--;
+			}
+			else
+			{
+				_memcpy(print, space, 1);
+				arr--;
+			}
 		}
 	}
 	if (j > 1)

@@ -112,7 +112,15 @@ int out_array(unsigned int n, buffer_t *print, int opp)
 		i++;
 	}
 	if (opp > 0 && opp > i)
-		print->buffer -= i + 1;
+	{
+		print->buffer -= i;
+		print->len -= i;
+	}
+	if (opp > 0 && opp < i)
+	{
+		print->buffer -= opp;
+		print->len -= opp;
+	}
 	i--;
 	while (i >= 0)
 	{

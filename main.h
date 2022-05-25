@@ -76,5 +76,5 @@ unsigned int _memcpy(buffer_t *print, const char *src, unsigned int n);
 
 
 int flag_sub(int arr, int i, int j, const char *format, buffer_t *print,
-	 char *small, char *big, char oct, char *space);
+	     char *small, char *big, char oct, char *space, char *zero);
 #endif

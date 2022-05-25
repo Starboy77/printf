@@ -15,8 +15,17 @@ int string(va_list ptr, buffer_t *print, int arr)
 	str = va_arg(ptr, char *);
 	if (arr > 0 && arr > _strlen(str))
 	{
-		print->buffer -= _strlen(str) + 1;
+		print->buffer -= _strlen(str);
+		print->len -= _strlen(str);
 		_memcpy(print, str, _strlen(str));
+		return (0);
+	}
+	if (arr > 0 && arr < _strlen(str))
+	{
+		print->buffer -= arr;
+		print->len -= arr;
+		_memcpy(print, str, _strlen(str));
+		return (0);
 	}
 	if (str == 0)
 	{
@@ -44,7 +53,10 @@ int cha(va_list ptr, buffer_t *print, int arr)
 
 	cha = (char)va_arg(ptr, int);
 	if (arr > 0 && arr > 1)
-		print->buffer -= 1 + 1;
+	{
+		print->buffer -= 1;
+		print->len -= 1;
+	}
 	_memcpy(print, &cha, 1);
 	return (0);
 }

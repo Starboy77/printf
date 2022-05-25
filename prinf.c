@@ -83,7 +83,7 @@ format[i + 1] != 'u' && format[i + 1] != 'o' && format[i + 1] != 'x' &&
 format[i + 1] != 'X' && format[i + 1] != 'p' && format[i + 1] != 'b' &&
 format[i + 1] != 'S' && format[i + 1] != 'r' && format[i + 1] != 'R' &&
 format[i + 1] != '+' && format[i + 1] != 'h' && format[i + 1] != '#' &&
-format[i + 1] != '%' && format[i + 1] != ' ')
+format[i + 1] != '%' && format[i + 1] != ' ' && format[i + j] < 48 && format[i + j] > 57)
 			{
 				j = not_spec(i, format, print);
 				i = j + 1;
@@ -135,15 +135,21 @@ int print_end(buffer_t *print, va_list ptr, int final)
 
 int not_spec(int i, const char *format, buffer_t *print)
 {
-	if (format[i + 1] != 's' && format[i + 1] != 'c' && format[i + 1] != 'd'
-	    && format[i + 1] != 'i' && format[i + 1] != 'u' && format[i + 1] !=
-	    'o' && format[i + 1] != 'x' && format[i + 1] != 'X' && format[i + 1]
-	    != 'p' && format[i + 1] != 'b' && format[i + 1] != 'S' &&
-	    format[i + 1] != 'r' && format[i + 1] != 'R' && format[i + 1] != 0
-	    && format[i + 1] != '+' && format[i + 1] != 'h' && format[i + 1] != 'l')
+	int j = 1;
+
+	while (format[i + j])
 	{
-		_memcpy(print, &format[i], 1);
-		_memcpy(print, &format[i + 1], 1);
+		if ((format[i + j] != 's' && format[i + j] != 'c' && format[i + j] != 'd'
+		    && format[i + j] != 'i' && format[i + j] != 'u' && format[i + j] !=
+		    'o' && format[i + j] != 'x' && format[i + j] != 'X' && format[i + j]
+		    != 'p' && format[i + 1] != 'b' && format[i + j] != 'S' &&
+		    format[i + j] != 'r' && format[i + j] != 'R' && format[i + 1] != 0
+		     && format[i + j] != '+' && format[i + j] != 'h' && format[i + j] != 'l') && (format[i + j] < 48 && format[i + j] > 57 && format[i + j] != '-' && format[i + j] != ' '))
+		{
+			_memcpy(print, &format[i], 1);
+			_memcpy(print, &format[i + j], 1);
+		}
+		j++;
 	}
-	return (i + 1);
-}
+	return (i + j);
+	}
