@@ -116,10 +116,10 @@ format[i + 1] != '%' && format[i + 1] != ' ')
 
 int print_end(buffer_t *print, va_list ptr, int final)
 {
-	va_end(ptr);
 	write(1, print->start, print->len);
 	final = print->len;
 	free_buf(print);
+	va_end(ptr);
 	return (final);
 }
 
@@ -140,7 +140,7 @@ int not_spec(int i, const char *format, buffer_t *print)
 	    'o' && format[i + 1] != 'x' && format[i + 1] != 'X' && format[i + 1]
 	    != 'p' && format[i + 1] != 'b' && format[i + 1] != 'S' &&
 	    format[i + 1] != 'r' && format[i + 1] != 'R' && format[i + 1] != 0
-	    && format[i + 1] != '+' && format[i + 1] != 'h')
+	    && format[i + 1] != '+' && format[i + 1] != 'h' && format[i + 1] != 'l')
 	{
 		_memcpy(print, &format[i], 1);
 		_memcpy(print, &format[i + 1], 1);

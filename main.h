@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #define SHORT 1
 #define LONG 2
-
+#define VAR(x) ((x) == 1 ? (1) : (0))
 /**
  * struct buffer - struct
  * @buffer: store strings
@@ -18,7 +18,6 @@ typedef struct buffer
 	char *buffer;
 	char *start;
 	unsigned int len;
-	unsigned int final;
 }  buffer_t;
 
 /**
