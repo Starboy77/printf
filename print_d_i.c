@@ -15,9 +15,11 @@
 int print_d_i(va_list ptr, buffer_t *print, int arr)
 {
 	char d, c = '-';
-	long int res = 0, i;
+	long int res = 0, temp = 0, l, i;
+	unsigned long int n;
 
 	res = va_arg(ptr, int);
+	n = res;
 	if (res == 0)
 	{
 		d = '0';
@@ -26,22 +28,30 @@ int print_d_i(va_list ptr, buffer_t *print, int arr)
 	}
 	if (res < 0)
 	{
-		res = res * -1;
-		i = 1;
-		if (print->start[print->len - i] == '+')
-		{
-			print->start[print->len - i] = '-';
-		}
-		else if (print->start[print->len - i] == ' ')
-		{
-			print->start[print->len - i] = '-';
-		}
-		else
-			_memcpy(print, &c, 1);
+		n = -res;
+		_memcpy(print, &c, 1);
 	}
-	out_array(res, print, arr);
 
-	return (0);
+	i = 0;
+	while (n > 0)
+	{
+		l = n % 10;
+		temp = (temp * 10) + l;
+		n = n / 10;
+		i++;
+	}
+	if (arr > 0 && arr > i)
+		print->buffer -= i + 1;
+
+	while (temp > 0)
+	{
+		l = temp % 10;
+		d = l + '0';
+		_memcpy(print, &d, 1);
+		temp = temp / 10;
+	}
+
+	return (arr);
 }
 
 
@@ -81,47 +91,35 @@ long int ret(int re, buffer_t *print)
 
 /**
  * out_array - function output array
- * @res: parametr of type int
+ * @n: parametr of type int
  * @print: memory buffer
  * @opp: integer parameter
  * Return: 0
  */
 
-int out_array(int res, buffer_t *print, int opp)
+int out_array(int n, buffer_t *print, int opp)
 {
-	long int ser;
 	char d;
-	int j = 0, m = 0, temp = 0, *arr;
+	int l, temp = 0, i = 0;
 
-	ser = res;
-	m = 0;
-	while (res > 0)
+	i = 0;
+	while (n > 0)
 	{
-		res = res / 10;
-		m++;
+		l = n % 10;
+		temp = (temp * 10) + l;
+		n = n / 10;
+		i++;
 	}
-	arr = malloc(sizeof(int) * m);
-	if (arr == NULL)
-		return (1);
-	j = 0;
-	while (ser > 0)
+	if (opp > 0 && opp > i)
+		print->buffer -= i + 1;
+	while (temp > 0)
 	{
-		temp = ser % 10;
-		ser = ser / 10;
-		arr[j] = temp;
-		j++;
-	}
-	if (opp > 0 && opp > m)
-		print->buffer -= m + 1;
-	m--;
-	while (m >= 0)
-	{
-		d = arr[m] + '0';
+		l = temp % 10;
+		d = l + '0';
 		_memcpy(print, &d, 1);
-		m--;
+		temp = temp / 10;
 	}
-	free(arr);
-	return (0);
+	return (opp);
 }
 
 
@@ -141,6 +139,7 @@ int ret_none(int re, buffer_t *print)
 	if (re < 0)
 	{
 		re = re * -1;
+		re = (unsigned int)re;
 		i = 1;
 			if (print->start[print->len - i] == '+')
 			{
@@ -164,12 +163,14 @@ int ret_none(int re, buffer_t *print)
 /**
  * check_zero - check for zero
  * @res: params
+ * @print: buffer memory
  * Return: 0
  */
 
 int check_zero(long int res, buffer_t *print)
 {
 	char d;
+
 	if (res == 0)
 	{
 		d = '0';
