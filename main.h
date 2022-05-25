@@ -65,7 +65,7 @@ char *rot(char *s);
 int not_spec(int i, const char *format, buffer_t *print);
 void convert_p_hex(int i, int *arr, buffer_t *print);
 void convert_hex_upper(int i, int *arr, buffer_t *print);
-int out_array(int res, buffer_t *print, int arr);
+int out_array(unsigned int res, buffer_t *print, int arr);
 int width(int i, const char *format);
 
 /* buffer free func */

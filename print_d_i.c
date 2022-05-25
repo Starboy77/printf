@@ -15,7 +15,7 @@
 int print_d_i(va_list ptr, buffer_t *print, int arr)
 {
 	char d, c = '-';
-	long int res = 0, temp = 0, l, i;
+	long int res = 0;
 	unsigned long int n;
 
 	res = va_arg(ptr, int);
@@ -31,26 +31,7 @@ int print_d_i(va_list ptr, buffer_t *print, int arr)
 		n = -res;
 		_memcpy(print, &c, 1);
 	}
-
-	i = 0;
-	while (n > 0)
-	{
-		l = n % 10;
-		temp = (temp * 10) + l;
-		n = n / 10;
-		i++;
-	}
-	if (arr > 0 && arr > i)
-		print->buffer -= i + 1;
-
-	while (temp > 0)
-	{
-		l = temp % 10;
-		d = l + '0';
-		_memcpy(print, &d, 1);
-		temp = temp / 10;
-	}
-
+	out_array(n, print, arr);
 	return (arr);
 }
 
@@ -97,28 +78,40 @@ long int ret(int re, buffer_t *print)
  * Return: 0
  */
 
-int out_array(int n, buffer_t *print, int opp)
+int out_array(unsigned int n, buffer_t *print, int opp)
 {
 	char d;
-	int l, temp = 0, i = 0;
+	long int i, j, l, *arry;
+	unsigned int m;
 
+	m = n;
+	j = 0;
+	while (m > 0)
+	{
+		m = m / 10;
+		j++;
+	}
+	arry = malloc(sizeof(long int) * j);
+	if (arry == NULL)
+		return (1);
 	i = 0;
 	while (n > 0)
 	{
 		l = n % 10;
-		temp = (temp * 10) + l;
+		arry[i] = l;
 		n = n / 10;
 		i++;
 	}
 	if (opp > 0 && opp > i)
 		print->buffer -= i + 1;
-	while (temp > 0)
+	i--;
+	while (i >= 0)
 	{
-		l = temp % 10;
-		d = l + '0';
+		d = arry[i] + '0';
 		_memcpy(print, &d, 1);
-		temp = temp / 10;
+		i--;
 	}
+	free(arry);
 	return (opp);
 }
 
